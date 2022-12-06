@@ -13,6 +13,8 @@ Neste repositório, deixaremos todo o projeto de Machine Learning. Para organiza
 
 Para obter os dados finais, você pode baixá-los <a target="_blank" href="https://drive.google.com/drive/folders/1eABXKaebgqPZEvNfjDPIWcwFmir05Fg-?usp=sharing">aqui</a> e guardar nas pastas adequadas (conforme a organização do projeto). Devido ao limite de tamanho dos arquivos no git, não pudemos carregar processed e raw diretamente. 
 
+Também sobre os dados, você pode obtê-los de maneira automatizada rodando o script 'make_dataset.py' localizado na pasta src/data, mas já enfrentamos problemas de indisponibilidade da API, e nesses casos, vale fazer o download do Kaggle - assim como fizemos.
+
 ## Organização do Projeto 
 
 ------------
@@ -54,7 +56,9 @@ Para obter os dados finais, você pode baixá-los <a target="_blank" href="https
 Para a frente de ML, tínhamos o objetivo de treinar modelos para realizar recomendações para usuários de forma automática.
 Testamos duas abordagens principais: filtros colaborativos e filtros colaborativos neurais. 
 Os filtros colaborativos são uma abordagem muito utilizada na literatura para recomendações, mas da forma que implementamos, não era escalável para uma quantidade grande de recomendações além de ser muito demorado.
+
 Como alternativa, utilizamos filtros colaborativos neurais (NCF), e nessa abordagem pudemos usar modelos tensorflow, o que nos permitiu rodar os modelos em GPU usando o Google Colab. Vale ressaltar que para a versão de 1M de avaliações é necessário usar os recursos do Colab Pro (que infelizmente, é pago).
+
 Na abordagem de NCF nos baseamos numa implementação da biblioteca "reco-utils", que estava escrita em uma versão não compatível com o colab. Tivemos que adaptar todo o código para que pudêssemos usá-lo com nossos dados e realizar nossos testes. 
 Por tanto, a quem interessar, vale realizar os experimentos com as duas metodologias para fins compativos e científicos.
 
@@ -62,4 +66,5 @@ Por tanto, a quem interessar, vale realizar os experimentos com as duas metodolo
 ## Passos Futuros 
 
 Como mencionado anteriormente, conseguimos um ganho de performance bem considerável com os NCF mas essa abordagem tem um problema: você não pode adicionar novos usuários. Ou seja, os usuários do teste, necessariamente deverão estar no treino para que você possa obter resultados consistentes. Uma alternativa, seria implementar um algoritmo que aceite a inserção de novos usuários, como por exemplo o Neural Graph Collaborative Filtering.
+
 Outra alternativa para passos futuros seria também procurar uma forma para rodar os filtros colaborativos tradicionais em GPU. Algumas possíveis libs pesquisadas seriam cudf/cupy e implicit. 
